@@ -1,11 +1,17 @@
 import { CiDeliveryTruck } from "react-icons/ci";
 import { RiEBikeFill } from "react-icons/ri";
-import { FaMotorcycle, FaRegCreditCard, FaUsers } from "react-icons/fa";
+import {
+  FaMotorcycle,
+  FaRegCreditCard,
+  FaTasks,
+  FaUsers,
+} from "react-icons/fa";
 import { Link, NavLink, Outlet } from "react-router";
 import useRole from "../hooks/useRole";
 
 const DashboardLayout = () => {
   const { role } = useRole();
+
   return (
     <div className="container mx-auto">
       <div className="drawer lg:drawer-open">
@@ -74,8 +80,8 @@ const DashboardLayout = () => {
                 </Link>
               </li>
 
-              {/* List item */}
-              {/* Our dashboard links */}
+              {/* List item 1 */}
+              {/* Our dashboard links 2 */}
               <li>
                 <NavLink
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
@@ -86,7 +92,7 @@ const DashboardLayout = () => {
                   <span className="is-drawer-close:hidden">My Parcels</span>
                 </NavLink>
               </li>
-              {/* Our dashboard links 2 */}
+              {/* Our dashboard links 3 */}
               <li>
                 <NavLink
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
@@ -99,8 +105,25 @@ const DashboardLayout = () => {
                   </span>
                 </NavLink>
               </li>
-              {/* Admin*/}
-              {role.role === "admin" && (
+              {/* Rider */}
+              {role === "rider" && (
+                <>
+                  <li>
+                    <NavLink
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Assign deliveries"
+                      to="/dashboard/assign-deliveries"
+                    >
+                      <FaTasks></FaTasks>
+                      <span className="is-drawer-close:hidden">
+                        Assign deliveries
+                      </span>
+                    </NavLink>
+                  </li>
+                </>
+              )}
+              {/* Admin Only Link*/}
+              {role === "admin" && (
                 <>
                   <li>
                     <NavLink

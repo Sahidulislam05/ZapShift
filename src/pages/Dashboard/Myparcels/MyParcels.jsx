@@ -100,7 +100,13 @@ const MyParcels = () => {
                   )}
                 </td>
                 <td>{parcel.trackingId}</td>
-                <td>{parcel.deliveryStatus}</td>
+                <td>
+                  {typeof parcel.deliveryStatus === "string"
+                    ? parcel.deliveryStatus
+                    : "Waiting"}
+                </td>
+                {/* <td>{parcel.deliveryStatus}</td> */}
+
                 <td className="flex flex-col md:flex-row justify-center items-center gap-2">
                   <button className="btn btn-square hover:bg-primary">
                     <FaMagnifyingGlass />
