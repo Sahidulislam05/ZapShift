@@ -9,12 +9,13 @@ import {
 } from "react-icons/fa";
 import { Link, NavLink, Outlet } from "react-router";
 import useRole from "../hooks/useRole";
+import logo from "../assets/logo.png";
 
 const DashboardLayout = () => {
   const { role } = useRole();
 
   return (
-    <div className="container mx-auto">
+    <div className="w-11/12 mx-auto">
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
@@ -58,8 +59,13 @@ const DashboardLayout = () => {
             <ul className="menu w-full grow">
               {/* List item */}
               <li>
+                <Link to="/">
+                  <img src={logo} alt="" />
+                </Link>
+              </li>
+              <li>
                 <Link
-                  to="/"
+                  to="/dashboard"
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                   data-tip="Homepage"
                 >
