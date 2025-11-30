@@ -22,7 +22,7 @@ const AssignRiders = () => {
   const parcels = data?.result ?? [];
   const formatDate = (date) => new Date(date).toLocaleDateString();
 
-  const { data: riders = [] } = useQuery({
+  const { data: riders = [], refetch: riderRefetch } = useQuery({
     queryKey: ["riders", selectedParcel?.senderDistrict, "available"],
     enabled: !!selectedParcel,
     queryFn: async () => {
@@ -50,6 +50,7 @@ const AssignRiders = () => {
       .then((res) => {
         if (res.data.modifiedCount) {
           refetch();
+          riderRefetch();
           riderModalRef.current.close();
           Swal.fire({
             position: "top-end",
