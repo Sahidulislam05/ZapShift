@@ -11,7 +11,7 @@ import MerchantBanner from "../../../components/Others/MerchantBanner";
 const Home = () => {
   const reviewsPromise = fetch("/reviews.json").then((res) => res.json());
   return (
-    <div>
+    <div className="mt-16">
       <Banner></Banner>
       <BannerCard></BannerCard>
       <ServicesCard></ServicesCard>

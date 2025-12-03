@@ -1,17 +1,12 @@
-import React from "react";
+import { Link } from "react-router";
 import Logo from "../../../components/logo/Logo";
-
+import { FaSquareGithub } from "react-icons/fa6";
 const Footer = () => {
   return (
     <div>
-      <footer className="footer footer-horizontal footer-center text-secondary p-10">
+      <footer className="bg-base-200 footer footer-horizontal footer-center text-secondary py-10 mt-10">
         <aside>
           <Logo></Logo>
-          <p className="font-bold">
-            ACME Industries Ltd.
-            <br />
-            Providing reliable tech since 1992
-          </p>
           <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
         </aside>
         <nav>
@@ -49,6 +44,12 @@ const Footer = () => {
                 <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
               </svg>
             </a>
+            <Link
+              to={"https://github.com/Sahidulislam05/ZapShift"}
+              className="text-3xl"
+            >
+              <FaSquareGithub />
+            </Link>
           </div>
         </nav>
       </footer>

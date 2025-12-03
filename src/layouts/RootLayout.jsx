@@ -8,8 +8,8 @@ const RootLayout = () => {
       <div className="container mx-auto">
         <Navbar></Navbar>
         <Outlet></Outlet>
-        <Footer></Footer>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

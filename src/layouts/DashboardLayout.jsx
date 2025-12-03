@@ -15,200 +15,166 @@ const DashboardLayout = () => {
   const { role } = useRole();
 
   return (
-    <div className="w-11/12 mx-auto">
+    <div className="mx-auto min-h-screen bg-base-100">
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content">
+
+        {/* Main Content */}
+        <div className="drawer-content flex flex-col">
           {/* Navbar */}
-          <nav className="navbar w-full bg-base-300">
-            <label
-              htmlFor="my-drawer-4"
-              aria-label="open sidebar"
-              className="btn btn-square btn-ghost"
-            >
-              {/* Sidebar toggle icon */}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                strokeLinejoin="round"
-                strokeLinecap="round"
-                strokeWidth="2"
-                fill="none"
-                stroke="currentColor"
-                className="my-1.5 inline-block size-4"
+          <nav className="navbar w-full bg-base-300 shadow-md px-4 sticky top-0 z-20">
+            <div className="flex items-center gap-4">
+              <label
+                htmlFor="my-drawer-4"
+                aria-label="open sidebar"
+                className="btn btn-square btn-ghost lg:hidden"
               >
-                <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
-                <path d="M9 4v16"></path>
-                <path d="M14 10l2 2l-2 2"></path>
-              </svg>
-            </label>
-            <div className="px-4 text-pink-500">Zap Shift Dashboard</div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  fill="none"
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </label>
+
+              <h2 className="text-xl font-bold text-pink-500 tracking-wide">
+                Zap Shift Dashboard
+              </h2>
+            </div>
           </nav>
-          {/* Page content here */}
-          <Outlet></Outlet>
+
+          {/* Page Content */}
+          <div className="p-4">
+            <Outlet />
+          </div>
         </div>
 
-        <div className="drawer-side is-drawer-close:overflow-visible">
-          <label
-            htmlFor="my-drawer-4"
-            aria-label="close sidebar"
-            className="drawer-overlay"
-          ></label>
-          <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
-            {/* Sidebar content here */}
-            <ul className="menu w-full grow">
-              {/* List item */}
+        {/* Sidebar */}
+        <div className="drawer-side">
+          <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
+
+          <aside className="min-h-full w-64 bg-base-200 border-r border-base-300 flex flex-col">
+            <div className="p-4 border-b border-base-300 w-full flex items-center justify-center">
+              <Link to="/">
+                <img src={logo} alt="Logo" />
+              </Link>
+            </div>
+
+            {/* Menu */}
+            <ul className="menu px-4 py-4 space-y-2">
               <li>
-                <Link to="/">
-                  <img src={logo} alt="" />
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/dashboard"
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Homepage"
-                >
-                  {/* Home icon */}
+                <NavLink to="/dashboard" className="flex items-center gap-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
                     strokeWidth="2"
                     fill="none"
                     stroke="currentColor"
-                    className="my-1.5 inline-block size-4"
+                    className="size-5"
                   >
-                    <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
-                    <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <path d="M3 10l9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                   </svg>
-                  <span className="is-drawer-close:hidden">Homepage</span>
-                </Link>
+                  Homepage
+                </NavLink>
               </li>
 
-              {/* List item 1 */}
-              {/* Our dashboard links 2 */}
               <li>
                 <NavLink
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="My Parcels"
                   to="/dashboard/my-parcels"
+                  className="flex items-center gap-3"
                 >
-                  <CiDeliveryTruck></CiDeliveryTruck>
-                  <span className="is-drawer-close:hidden">My Parcels</span>
+                  <CiDeliveryTruck className="text-lg" /> My Parcels
                 </NavLink>
               </li>
-              {/* Our dashboard links 3 */}
+
               <li>
                 <NavLink
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Payment History"
                   to="/dashboard/payment-history"
+                  className="flex items-center gap-3"
                 >
-                  <FaRegCreditCard></FaRegCreditCard>
-                  <span className="is-drawer-close:hidden">
-                    Payment History
-                  </span>
+                  <FaRegCreditCard /> Payment History
                 </NavLink>
               </li>
+
               {/* Rider */}
               {role === "rider" && (
                 <>
                   <li>
                     <NavLink
-                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                      data-tip="Assign deliveries"
                       to="/dashboard/assign-deliveries"
+                      className="flex items-center gap-3"
                     >
-                      <FaTasks></FaTasks>
-                      <span className="is-drawer-close:hidden">
-                        Assign deliveries
-                      </span>
+                      <FaTasks /> Assign Deliveries
                     </NavLink>
                   </li>
+
                   <li>
                     <NavLink
-                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                      data-tip="Completed deliveries"
                       to="/dashboard/completed-deliveries"
+                      className="flex items-center gap-3"
                     >
-                      <SiGoogletasks />
-                      <span className="is-drawer-close:hidden">
-                        Completed deliveries
-                      </span>
+                      <SiGoogletasks /> Completed Deliveries
                     </NavLink>
                   </li>
                 </>
               )}
-              {/* Admin Only Link*/}
+
+              {/* Admin */}
               {role === "admin" && (
                 <>
                   <li>
                     <NavLink
-                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                      data-tip=" Approve Riders"
                       to="/dashboard/approve-riders"
+                      className="flex items-center gap-3"
                     >
-                      <FaMotorcycle></FaMotorcycle>
-                      <span className="is-drawer-close:hidden">
-                        Approve Riders
-                      </span>
+                      <FaMotorcycle /> Approve Riders
                     </NavLink>
                   </li>
+
                   <li>
                     <NavLink
-                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                      data-tip="Assign Riders"
                       to="/dashboard/assign-riders"
+                      className="flex items-center gap-3"
                     >
-                      <RiEBikeFill />
-                      <span className="is-drawer-close:hidden">
-                        Assign Riders
-                      </span>
+                      <RiEBikeFill /> Assign Riders
                     </NavLink>
                   </li>
+
                   <li>
                     <NavLink
-                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                      data-tip="Users Management"
                       to="/dashboard/users-management"
+                      className="flex items-center gap-3"
                     >
-                      <FaUsers></FaUsers>
-                      <span className="is-drawer-close:hidden">
-                        Users Management
-                      </span>
+                      <FaUsers /> Users Management
                     </NavLink>
                   </li>
                 </>
               )}
 
               <li>
-                <button
-                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Settings"
-                >
-                  {/* Settings icon */}
+                <button className="flex items-center gap-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
                     strokeWidth="2"
                     fill="none"
                     stroke="currentColor"
-                    className="my-1.5 inline-block size-4"
+                    className="size-5"
                   >
-                    <path d="M20 7h-9"></path>
-                    <path d="M14 17H5"></path>
-                    <circle cx="17" cy="17" r="3"></circle>
-                    <circle cx="7" cy="7" r="3"></circle>
+                    <circle cx="7" cy="7" r="3" />
+                    <circle cx="17" cy="17" r="3" />
+                    <path d="M20 7h-9" />
+                    <path d="M14 17H5" />
                   </svg>
-                  <span className="is-drawer-close:hidden">Settings</span>
+                  Settings
                 </button>
               </li>
             </ul>
-          </div>
+          </aside>
         </div>
       </div>
     </div>
